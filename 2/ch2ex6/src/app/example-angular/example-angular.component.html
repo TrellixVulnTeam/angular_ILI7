@@ -1,0 +1,23 @@
+<p class="para1">example-angular works!</p>
+<div>
+    Enter Your Name: <input type="text" value={{name}} /> <br />
+    <button (click)="greet()">Greet Me!</button><br>
+    <input type="text"  (keyup)="btnenable($event)" id="text1"
+    [value]="valueName">
+    <button [disabled]="!btnDisable" (click)="btnclick($event)">click</button>
+    <button [disabled]="!btnDisable" (click)="btnreset()">click</button>
+</div>
+
+<h4>Basic native select</h4>
+<div appearance="fill">
+  <div>Cars</div>
+  <select matNativeControl required>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </select>
+</div>
+
+
+
