@@ -1,0 +1,8 @@
+<app-user (userAdded)="onUserAdd($event)"></app-user>
+<div *ngFor="let user of userAdminComparr">
+
+    first name:{{user.firstname}}
+    family name:{{user.familyName}}
+    country name:{{user.countryName}}
+    <br>
+</div>
