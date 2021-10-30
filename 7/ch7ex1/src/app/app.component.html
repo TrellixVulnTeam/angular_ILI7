@@ -1,0 +1,26 @@
+<div ng-repeat="myObject in myObject">
+  {{myObject[1].colour}}
+  {{myObject[0]}}
+</div>
+<!-- <div *ngFor="myObject of myObject">
+
+</div> -->
+<ng-template *ngFor="myObject of myObject">
+  ngTemplateOutlet
+</ng-template>
+<ul>
+  <p *ngFor="let item of myObject; index as i;" ng-repeat="myObject in myObject" appCustomeDirective>
+    
+      colour={{myObject[i].colour}}, text ={{myObject[i].text}}<br>
+      colour={{item.colour}}, text ={{item.text}}
+    
+    <!-- {{item}} -->
+  </p>
+</ul>
+<!-- <div ng-repeat="myObject in myObject" style="cursor:pointer">
+  <p class=" tag-label">
+    {{myObject[0].colour}}
+
+  </p>
+
+</div> -->
