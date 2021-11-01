@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of student1; let i = index" >
+      
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.school}}</td>
+        <td>{{user.date}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
