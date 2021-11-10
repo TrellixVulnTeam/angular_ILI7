@@ -3,10 +3,11 @@ import { Employee } from "./employee.model";
 
 export class employeeService{
     employee : Employee[] = [];
-    employeeAdded = new Subject<Employee[]>();
+    employeeAdd = new Subject;
+    // employeeAdd = new Subject<Employee[]>();
   
     addEmployee(employee: Employee){
       this.employee.push(employee);
-      this.employeeAdded.next(this.employee);
+      this.employeeAdd.next(this.employee);
     }
 }
