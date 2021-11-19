@@ -19,7 +19,7 @@
                 >Username<span class="text-danger">*</span>:</label
               ><br />
               <input
-                type="email"
+                type="text"
                 name="username"
                 formControlName="username"
                 id="username"
@@ -88,7 +88,7 @@
                     !signupForm.get('email').errors['required']
                   "
                 >
-                  This email is invalid
+                  This email is invalid and end with @prominentpixel.com
                 </span>
               </span>
             </div>
@@ -121,7 +121,7 @@
                     !signupForm.get('fullname').errors['required']
                   "
                 >
-                  This fullname is invalid
+                  This fullname only contains Alphabets 
                 </span>
               </span>
             </div>
@@ -130,7 +130,7 @@
               <label for="password" class="text-info"
                 >Password<span class="text-danger">*</span>:</label
               ><br />
-              <input
+              <input matInput
                 type="text"
                 name="password"
                 formControlName="password"
@@ -155,7 +155,7 @@
                     !signupForm.get('password').errors['required']
                   "
                 >
-                  This password is invalid
+                  This password is invalid beacuse It must have capital, small and special char  and also a number and 8 number.
                 </span>
               </span>
             </div>
@@ -164,12 +164,12 @@
               <label for="password" class="text-info"
                 >Confirm Password<span class="text-danger">*</span>:</label
               ><br />
-              <input
+              <input matInput
                 type="text"
                 name="confirmpassword"
                 id="confirmpassword"
                 formControlName="confirmpassword"
-                class="form-control"
+                class="form-control" 
               />
 
               <span
@@ -190,7 +190,7 @@
                     !signupForm.get('confirmpassword').errors['required']
                   "
                 >
-                  This confirmpassword is invalid
+                  This confirmpassword is not match with password
                 </span>
                 
               </span>

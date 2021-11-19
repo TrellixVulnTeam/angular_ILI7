@@ -19,7 +19,7 @@ infiniteScroll
   (scrolled)="onScroll()"
   [scrollWindow]="false">
 
-      <a class="list-group" style="height: auto;" *ngFor="let i of blogs" >
+      <a class="list-group" style="height: auto;" *ngFor="let i of blogs;let i1 = index" >
         <div class="list-group-item list-group-item-action" >
           <div (click)="blogShowDetail(i.id)">
 
@@ -30,7 +30,7 @@ infiniteScroll
             <h2 class="mb-1" [innerHTML]="i.description"> </h2>
           </div>
           <div>
-            <button class="btn btn-danger" (click)="deleteBlog(i.id)">delete</button>
+            <button class="btn btn-danger" (click)="deleteBlog(i1)">delete</button>
           </div>
           <small></small>
         </div>

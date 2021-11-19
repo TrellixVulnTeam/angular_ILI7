@@ -54,6 +54,18 @@
                   />
                 </div>
 
+                <ng-multiselect-dropdown
+                    [placeholder]="'custom placeholder'"
+                    [settings]="dropdownSettings"
+                    [data]="dropdownList"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    ngModel
+                    name="language"
+                    #language
+                  >
+                  </ng-multiselect-dropdown>
+
                 
                 
                 <div class="form-group">
