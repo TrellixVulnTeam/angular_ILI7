@@ -17,7 +17,7 @@
                     <h2 class="card-title">Featured Post Title</h2>
                     <p class="card-text" [innerHTML]="blog.description"></p>
                     
-                    <a class="card-text" *ngFor="let tags of blog.tags">{{tags.item_text}},</a>
+                    <a class="card-text" *ngFor="let tags of blog.language">{{tags.item_text}},</a>
                     <br>
                     <div class="" style="float: left;">
                         <a class="btn btn-primary"  (click)="onPreviousBlog()">Previous Blog</a>

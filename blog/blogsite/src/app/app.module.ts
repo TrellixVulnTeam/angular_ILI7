@@ -17,6 +17,7 @@ import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AuthService } from './shared/auth.service';
 import { EditblogComponent } from './blog/editblog/editblog.component';
+import { MyblogComponent } from './blog/myblog/myblog.component';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { EditblogComponent } from './blog/editblog/editblog.component';
     BlogDetailComponent,
     BlogListComponent,
     EditblogComponent,
+    MyblogComponent,
   ],
   imports: [
  

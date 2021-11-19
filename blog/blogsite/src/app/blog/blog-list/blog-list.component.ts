@@ -30,6 +30,7 @@ export class BlogListComponent implements OnInit {
     this.addItems(0,this.blogdisplay);
   }
   blogShowDetail(id:number){
+    console.log(id)
     this.router.navigate([id],{relativeTo:this.route})
   }
   // onScrollDown(ev: any) {

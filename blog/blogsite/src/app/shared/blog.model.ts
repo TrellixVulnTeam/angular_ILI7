@@ -3,27 +3,27 @@ export class Blog {
     title: string;
     description: string;
     imageUrl: string;
-    tags: { ['item_id']: number; ['item_text']: string }[];
     author: string;
+    language: { ['item_id']: number; ['item_text']: string }[];
     date?: Date;
-    publishBy?: number;
+    // publishBy?: number;
     constructor(
         id: number,
         title: string,
         description: string,
         imageUrl: string,
         author: string,
-        tags: { ['item_id']: number; ['item_text']: string }[],
+        language: { ['item_id']: number; ['item_text']: string }[],
         date: Date,
-        publishBy: number = null
+        // publishBy: number = null
       ) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.tags = tags;
+        this.language = language;
         this.author = author;
         this.date = date;
-        this.publishBy = publishBy;
+        // this.publishBy = publishBy;
       }
 }

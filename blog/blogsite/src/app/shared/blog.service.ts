@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AuthService } from './auth.service';
 import { Blog } from './blog.model';
 
 @Injectable({
@@ -13,16 +14,16 @@ export class BlogService {
       'aaa',
       'bbb',
       'https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg',
-      'author111',
+      'author',
       [{ item_id: 1, item_text: 'HTML' }, { item_id: 6, item_text: 'PHP' }],
-      new Date(2021, 11, 14, 12, 38, 32, 0)
+      new Date(2021, 10, 14, 12, 38, 32, 0)
     ),
     new Blog(
       1,
       'cc',
       'bbdddb',
       'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author1',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -31,9 +32,9 @@ export class BlogService {
       'dd',
       'bbb',
       'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author11',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
-      new Date(2021, 11, 14, 12, 38, 32, 0)
+      new Date(2021, 10, 14, 12, 38, 32, 0)
     ),
     new Blog(
       3,
@@ -49,7 +50,7 @@ export class BlogService {
       'ff',
       'bbb',
       'https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author2',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -58,7 +59,7 @@ export class BlogService {
       'gg',
       'bbdddb',
       'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author22',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -67,7 +68,7 @@ export class BlogService {
       'hh',
       'bbb',
       'https://images.pexels.com/photos/704971/pexels-photo-704971.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author222',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -76,12 +77,12 @@ export class BlogService {
       'jj',
       'bbdddb',
       'https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author111',
+      'author2222',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
   ];
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   getLatestIndexOfBlog(){
     return this.blogs.length;
@@ -99,21 +100,32 @@ export class BlogService {
     this.blogs.push(newBlog);
   }
 
+
+  getauther(auth) {
+    return this.blogs;
+  }
+
   editBlog(id: number, updateBlog: Blog){
     this.blogs[id] = updateBlog;
     this.updateBlog.next();
   }
 
   deleteBlog(id: number){
-    this.blogs.splice(id, 1);
+    this.blogs.splice(id,1);
     this.updateBlog.next();
   }
 
   getCurrentUserBlogs(userId: number){
     return this.blogs.filter(
       (blog) => {
-        return blog.publishBy == userId;
+        // return blog.publishBy == userId;
       }
     )
+  }
+
+  updateBlogs(index: number, newBlog) {
+    console.log(index)
+    this.blogs[index] = newBlog;
+    this.updateBlog.next(this.blogs.slice());
   }
 }
