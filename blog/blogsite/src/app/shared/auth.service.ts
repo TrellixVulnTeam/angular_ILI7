@@ -9,7 +9,6 @@ export class AuthService {
   loginUser = new Subject<string>();
   isLogin:boolean=false;
   loginUserNameOrEmail='';
-  currentUserId: number=0;
 
   constructor() { }
 
@@ -23,7 +22,6 @@ export class AuthService {
     }
 
     this.loginUser.next(this.loginUserNameOrEmail);
-    this.currentUserId++;
   }
 
   getAuthStatus(): boolean {
@@ -33,4 +31,11 @@ export class AuthService {
   getUserNameOrEmail(){
     return this.loginUserNameOrEmail;
   }
+
+  logOut(){
+    this.loginUserNameOrEmail='';
+    this.isLogin=false;
+    this.loginUser.next(this.loginUserNameOrEmail);
+  }
+
 }

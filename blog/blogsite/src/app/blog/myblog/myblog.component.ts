@@ -1,3 +1,4 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -20,6 +21,7 @@ export class MyblogComponent implements OnInit {
   myfinalblog:Blog[]=[];
   constructor(private blogService: BlogService,
     private authService: AuthService,
+    private router: Router,private route :ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,19 @@ export class MyblogComponent implements OnInit {
     console.log(this.myfinalblog);
 
     
+  }
+
+  onDetail(id){
+    this.router.navigate(['../blog/'+id],{relativeTo: this.route});
+  }
+  onEdit(id){
+    this.router.navigate(['../blog/'+id+'/edit'],{relativeTo: this.route});
+  }
+
+  onDelete(id){
+    console.log(id);
+    this.blogService.deleteBlog(id);
+    // this.router.navigate(['../this.myblog'],{relativeTo: this.route});
   }
 
 

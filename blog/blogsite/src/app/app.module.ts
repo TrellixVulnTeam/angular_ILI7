@@ -12,12 +12,12 @@ import { LoginComponent } from './login/login.component';
 import { AddBlogComponent } from './blog/add-blog/add-blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AuthService } from './shared/auth.service';
 import { EditblogComponent } from './blog/editblog/editblog.component';
 import { MyblogComponent } from './blog/myblog/myblog.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
@@ -39,10 +39,11 @@ import { MyblogComponent } from './blog/myblog/myblog.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    InfiniteScrollModule,
+    
     BrowserModule,
     CKEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
+    InfiniteScrollModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

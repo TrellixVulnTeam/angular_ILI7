@@ -89,28 +89,12 @@ export class EditblogComponent implements OnInit {
   }
 
   private initForm() {
-    // let recipeName = '';
-    // let recipeImagePath = '';
-    // let recipeDescription = '';
-    // let recipeIngredients = new FormArray([]);
-
+   
     if (this.editMode) {
       const blog = this.blogService.getBlog(this.id);
       // this.title = blog.title.toString();
       console.log(blog);
-      // if (recipe['ingredients']) {
-      //   for (let ingredient of recipe.ingredients) {
-      //     recipeIngredients.push(
-      //       new FormGroup({
-      //         name: new FormControl(ingredient.name, Validators.required),
-      //         amount: new FormControl(ingredient.amount, [
-      //           Validators.required,
-      //           Validators.pattern(/^[1-9]+[0-9]*$/)
-      //         ])
-      //       })
-      //     );
-      //   }
-      // }
+   
     }
   }
   onEditBlogSubmit() {
