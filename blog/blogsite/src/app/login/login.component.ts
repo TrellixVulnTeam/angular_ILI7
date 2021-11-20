@@ -10,7 +10,7 @@ import { AuthService } from '../shared/auth.service';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm:NgForm;
-  isUsername: boolean = false;
+  isUsername: boolean = true;
   isEmail: boolean = false;
   constructor(private authService:AuthService,
     private router:Router) { }

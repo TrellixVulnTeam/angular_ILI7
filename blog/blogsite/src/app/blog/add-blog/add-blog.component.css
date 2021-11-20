@@ -3,7 +3,7 @@ body, #blog  {
     padding-top: 20px;
     padding-bottom: 50px;
     background-color: #17a2b8;
-    height: 100vh;
+    height: auto;
     width: auto;
   }
   .container #blog-row #blog-column #blog-box {

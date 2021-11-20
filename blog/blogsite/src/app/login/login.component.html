@@ -16,10 +16,10 @@
               id="usernameOrEmail"
               required
               class="form-control"
-              ngModel
+              ngModel="username"
               name="usernameOrEmail" required (change)="onChangeSecondInputField($event.target.value)"
             >
-              <option value="username">Username</option>
+              <option value="username" >Username</option>
               <option value="email">Email</option>
             </select>
 

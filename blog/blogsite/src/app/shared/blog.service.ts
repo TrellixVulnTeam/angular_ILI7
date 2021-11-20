@@ -68,7 +68,7 @@ export class BlogService {
       'hh',
       'bbb',
       'https://images.pexels.com/photos/704971/pexels-photo-704971.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'author222',
+      'tulesh.g@prominentpixel.com',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -103,6 +103,12 @@ export class BlogService {
 
   getauther(auth) {
     return this.blogs;
+  } 
+
+  updateBlogs(index: number, newBlog) {
+    console.log(index)
+    this.blogs[index] = newBlog;
+    this.updateBlog.next(this.blogs.slice());
   }
 
   editBlog(id: number, updateBlog: Blog){
@@ -113,19 +119,5 @@ export class BlogService {
   deleteBlog(id: number){
     this.blogs.splice(id,1);
     this.updateBlog.next();
-  }
-
-  getCurrentUserBlogs(userId: number){
-    return this.blogs.filter(
-      (blog) => {
-        // return blog.publishBy == userId;
-      }
-    )
-  }
-
-  updateBlogs(index: number, newBlog) {
-    console.log(index)
-    this.blogs[index] = newBlog;
-    this.updateBlog.next(this.blogs.slice());
   }
 }

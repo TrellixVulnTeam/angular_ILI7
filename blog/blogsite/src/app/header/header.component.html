@@ -41,7 +41,7 @@
             <h5 *ngIf="loginUserName">welcome,{{loginUserName}}
               <button
               class="btn btn-success"
-              [routerLink]="['/signup']"
+              (click)="logOut()"
               type="button" style="float: right;"
               >
               Log out
