@@ -8,7 +8,7 @@ import { User } from './user';
 export class AuthService {
   loginUser = new Subject<string>();
   isLogin:boolean=false;
-  loginUserNameOrEmail='';
+  loginUserNameOrEmail='tulesh.g@prominentpixel.com';
 
   constructor() { }
 

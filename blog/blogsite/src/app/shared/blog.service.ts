@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Blog } from './blog.model';
@@ -8,6 +9,7 @@ import { Blog } from './blog.model';
 })
 export class BlogService {
   updateBlog=new Subject();
+  newBlog = new Subject<null>();
   blogs:Blog[]=[
     new Blog(
       0,
@@ -81,8 +83,35 @@ export class BlogService {
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
+    new Blog(
+      8,
+      'jj',
+      'bbdddb',
+      'https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'author2222',
+      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      new Date(2021, 11, 14, 12, 38, 32, 0)
+    ),
+    new Blog(
+      9,
+      'jj',
+      'bbdddb',
+      'https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'author2222',
+      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      new Date(2021, 11, 14, 12, 38, 32, 0)
+    ),
+    new Blog(
+      10,
+      'jj',
+      'bbdddb',
+      'https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'author2222',
+      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      new Date(2021, 11, 14, 12, 38, 32, 0)
+    ),
   ];
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
 
   getLatestIndexOfBlog(){
     return this.blogs.length;
@@ -109,15 +138,21 @@ export class BlogService {
     console.log(index)
     this.blogs[index] = newBlog;
     this.updateBlog.next(this.blogs.slice());
+    this.newBlog.next();
   }
 
   editBlog(id: number, updateBlog: Blog){
     this.blogs[id] = updateBlog;
     this.updateBlog.next();
+    this.newBlog.next();
   }
 
   deleteBlog(id: number){
     this.blogs.splice(id,1);
+    this.updateBlog.next(this.blogs.slice());
     this.updateBlog.next();
+    this.newBlog.next();
+    // alert("Blog deleted successfuly");
+    this.router.navigate(['../'])
   }
 }

@@ -13,12 +13,13 @@ import { AddBlogComponent } from './blog/add-blog/add-blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'node_modules/@ckeditor/ckeditor5-angular';
 import { AuthService } from './shared/auth.service';
 import { EditblogComponent } from './blog/editblog/editblog.component';
 import { MyblogComponent } from './blog/myblog/myblog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -44,8 +45,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CKEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
     InfiniteScrollModule,
+    NgbModule,
+
+    
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

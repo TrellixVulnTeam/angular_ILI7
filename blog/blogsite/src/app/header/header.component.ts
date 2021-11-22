@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 
@@ -25,6 +26,10 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.authService.logOut();
   }
 
+  selectedLan(lang){
+    console.log(lang);
+    // this.translate.use('hn');
+  }
   ngOnDestroy(){
     // this.subscription.unsubscribe();
   }
