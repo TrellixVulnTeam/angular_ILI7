@@ -9,9 +9,9 @@
         > -->
        
         <a class="nav-link" routerLink="/"
-          ><i class="fa fa-home fa-fw mr-1"></i>Home</a>
+          ><i class="fa fa-home fa-fw mr-1"></i>{{ 'HOME.home' | translate }}</a>
         <a class="nav-link" [routerLink]="['myblog']"
-          ><i class="fa fa-home fa-fw mr-1"></i>My blog</a>
+          ><i class="fa fa-home fa-fw mr-1"></i>{{'HOME.My blog'| translate }}</a>
         <!-- <div class="collapse navbar-collapse" id="nvbCollapse">
           <ul class="navbar-nav ml-auto">
             <li class="">
@@ -26,27 +26,44 @@
         </div> -->
       </div>
       <div class="col-md-6">
+        <!--<button
+              class="btn btn-success"
+              type="button" style="float: right;" (click)="selectedLan('de')">
+              HI
+            </button>
+        <button
+              class="btn btn-success"
+              type="button" style="float: right;" (click)="selectedLan('en')">
+              En
+            </button>-->
         <div class="collapse navbar-collapse" style="float:right" id="nvbCollapse">
-         
+          <div>
+           
+            <label>
+              <select #langSelect (change)="translate.use(langSelect.value)">
+                <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+              </select>
+            </label>
+          </div>
             <button
               class="btn btn-success"
               [routerLink]="['/signup']"
               type="button" style="float: right;"
               *ngIf="!loginUserName">
-              SignUp/Login
+              {{'HOME.SignUp/Login'|translate}}
             </button>
             <!-- <li class="nav-item active pl-1">
                             <a class="nav-link" href="#"><i class="fa fa-th-list fa-fw mr-1"></i>Blog</a>
                         </li> -->
-            <h5 *ngIf="loginUserName">welcome,{{loginUserName}}
+            <h3 *ngIf="loginUserName">welcome,{{loginUserName}}
               <button
               class="btn btn-success"
               (click)="logOut()"
               type="button" style="float: right;"
               >
-              Log out
+              {{'Log out'| translate }}
             </button>
-            </h5>
+            </h3>
            
         </div>
       </div>

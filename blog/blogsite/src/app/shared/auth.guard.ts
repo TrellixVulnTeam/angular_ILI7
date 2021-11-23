@@ -9,9 +9,10 @@ import { AuthService } from "./auth.service";
 export class AuthGuard implements CanActivate{
     constructor(private authService:AuthService,
         private router:Router){}
-    canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean{
-        const isAuthenticated = this.authService.getAuthStatus();
+    canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot): Observable<boolean|UrlTree> | Promise<boolean> | boolean|UrlTree{
+        let isAuthenticated = this.authService.getAuthStatus();
         if(!isAuthenticated){
+            alert("please login first")
         this.router.navigate(['login']);
         return false;
         }

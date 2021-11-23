@@ -1,0 +1,16 @@
+{
+  "HOME": {
+    "TITLE": "Hello Angular with ngx-translate!",
+    "SELECT": "Change language",
+    "home": "Home",
+    "My blog": "My blog",
+    "loginUserName": "loginUserName",
+    "SignUp/Login": "SignUp/Login",
+    "Log out": "Log out",
+    "Blog": "Blog",
+    "All rights reserved © 2021": "All rights reserved © 2021",
+    "Copyright": "Copyright",
+    "Communication": "Communication"
+    
+  }
+}

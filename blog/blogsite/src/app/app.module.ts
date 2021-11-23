@@ -13,12 +13,29 @@ import { AddBlogComponent } from './blog/add-blog/add-blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'node_modules/@ckeditor/ckeditor5-angular';
 import { AuthService } from './shared/auth.service';
 import { EditblogComponent } from './blog/editblog/editblog.component';
 import { MyblogComponent } from './blog/myblog/myblog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import {MatNativeDateModule} from '@angular/material/core';
+import { EditblogsComponent } from './blog/editblogs/editblogs.component';
+
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
+
 
 @NgModule({
   declarations: [
@@ -33,6 +50,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     BlogListComponent,
     EditblogComponent,
     MyblogComponent,
+    EditblogsComponent,
   ],
   imports: [
  
@@ -44,8 +62,21 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     CKEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
     InfiniteScrollModule,
+    NgbModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    BrowserAnimationsModule,
+    
+    MatNativeDateModule,
+    
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

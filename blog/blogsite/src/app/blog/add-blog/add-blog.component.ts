@@ -62,10 +62,11 @@ export class AddBlogComponent implements OnInit {
   onNewBlogSubmit(){
     console.log(this.loginForm.value);
     let id=this.blogService.getLatestIndexOfBlog();
-    let date=this.loginForm.value.date;
+    let date=new Date();
+    // let date=this.loginForm.value.date;
     let description=this.loginForm.value.description;
-    console.log(this.loginForm.value.language);
-    //return;
+    console.log(date);
+    // return;
     let a=this.blogService.addBlog({
       ...this.loginForm.value,
       description:description,
@@ -74,9 +75,9 @@ export class AddBlogComponent implements OnInit {
       publishBy: this.author,
     });
     // this.blo
-    console.log(a)
-    console.log(description)
-    console.log(this.blogService.getBlogs())
+    // console.log(a)
+    // console.log(description)
+    // console.log(this.blogService.getBlogs())
     this.router.navigate(['../']);
 
 

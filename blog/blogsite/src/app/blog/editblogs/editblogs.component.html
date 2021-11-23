@@ -1,74 +1,14 @@
-<!--<p>myblog works!</p>
-<div class="col-lg-3 col-md-3 col-sm-3" *ngIf="myblognumber">
-    <div class="cuadro_intro_hover " style="background-color:#cccccc;" *ngFor="let myfinalblog of myfinalblog;let i1 = index">
-        <p style="text-align:center; margin-top:20px;">
-            <img src="{{myfinalblog.imageUrl}}" class="img-responsive" alt="">
-             
-        </p>
-        <div class="caption">
-            <div class="blur"></div>
-            <div class="caption-text">
-                <h3 style="border-top:2px solid white; border-bottom:2px solid white; padding:10px;">{{myfinalblog.title}}</h3>
-                <p>{{myfinalblog.description}}</p>
-                <a class=" btn btn-default" href="#"><span class="glyphicon glyphicon-plus"> Edit</span></a>
-            </div>
-        </div>
-    </div>
+<!--<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>-->
+<div style="margin-left: 50px;">
+<p>editblogs works!{{dataToTakeAsInput}}</p>
 
-</div>-->
-
-<div style="background-color: #17a2b8; padding-bottom: 50px;" >
-    <div class="container">
-<table class="table table-bordered table-dark" style="border-collapse: collapse ">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Image</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-      <tr *ngFor="let myfinalblogone of myfinalblog;let i1 = index">
-        <th scope="row">{{myfinalblogone.id}}</th>
-        <td> <img class="rounded-top" src="{{myfinalblogone.imageUrl}}" alt="..." style="max-width:350px; max-height:280px"></td>
-        <td>{{myfinalblogone.title}}</td>
-        <td><p class="display-30" [innerHTML]="myfinalblogone.description" (click)="onDetail(myfinalblogone.id)"></p></td>
-        <td>
-            <!-- <button type="button" class="btn btn-primary"  (click)="toggleModal(myfinalblogone.id)">
-            Edit
-          </button>  -->
-          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal(myfinalblogone.id)">
-            Edit
-           </button> -->
-           <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(myfinalblogone.id)">Edit Blog</button>
-        </td>
-        <td><button type="button" class="btn btn-danger" (click)="onDelete(myfinalblogone.id)">
-            Delete
-          </button></td>
-      </tr>
-      
-    </tbody>
-  </table>
-  </div>
-  </div>
-  <!-- <app-editblog></app-editblog> -->
-  <!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" #basicModal style="width: 100%;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
-            <span aria-hidden="true" >&times;</span>
-          </button>
-        </div>
-        <div class="modal-body"> 
-          
-          <form
+<form
               id="blog-form"
               class="form" 
               (ngSubmit)="onEditBlogSubmit()"
@@ -110,7 +50,7 @@
                       id="imageUrl"
                       class="form-control"
                       name="imageUrl"
-                      ngModel
+                      ngModel="{{blogCurrent.imageUrl}}"
                       required
                       #imageUrl
                     />
@@ -151,7 +91,7 @@
                       id="author"
                       class="form-control"
                       name="author"
-                      ngModel
+                      ngModel={{blogCurrent.author}}
                       readonly
                     />
                     <input
@@ -159,13 +99,13 @@
                       id="id"
                       class="form-control"
                       name="id"
-                      ngModel
+                      ngModel={{blogCurrent.id}}
                       readonly
                     />
                   </div>
   
                   <div class="text-center">
-                    <button class="btn btn-success"  >Update Blog</button>
+                    <button class="btn btn-success" >Update Blog</button>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -178,11 +118,16 @@
                
               </div>
             </form>
-         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+            <div class="modal-footer"><button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" #closeBtn>
+                <span aria-hidden="true">&times;</span>
+              </button>
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Close click')"  #closeBtn>Close</button>
+  </div>
+</div>
+<!--<div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>-->
