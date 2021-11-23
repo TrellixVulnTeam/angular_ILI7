@@ -1,55 +1,14 @@
-<div style="background-color: #17a2b8; padding-bottom: 50px;" >
-<div class="container container-fuild" #blogdetail style="background-color: #17a2b8; padding-top: 20px;">
-    <div class="row" >
-        <!-- Blog entries-->
-        <div class="col-lg-12">
-            <a class="btn  btn-warning" routerLink="../">Back</a>
-            <!-- Featured blog post-->
-            <div class="card mb-4 ">
-                <h1 class="float-center" style="text-align: center;">{{blog.title}}</h1>
-                <div class="d-flex justify-content-center">
-                  <div class="arrows prev" (click)="onPreviousBlog()"  style="cursor: pointer; "></div>
-                <a href="{{blog.imageUrl}}" target="_blank"  style="cursor: pointer; "><img class="card-img-top justify-content-center"  src="{{blog.imageUrl}}" alt="..." style="width: 500px; height: 400px;"/></a>
-                <div class="arrows next" (click)="onNextBlog()" style="cursor: pointer; "></div>
-                </div>
-                <div class="card-body">
-                    <!-- <a class="btn  btn-warning" routerLink="edit">Edit</a> -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal()">
-                     Edit
-                    </button>
-                    <div class="small text-muted">Publish On:{{blog.date}}</div>
-                    <div class="small text-muted">Auther :{{this.blog.author}}</div>
-                    <h2 class="card-title">Featured Post Title</h2>
-                    <p class="card-text" [innerHTML]="blog.description"></p>
-                    
-                    <a class="card-text" *ngFor="let tags of blog.language">#{{tags.item_text}} </a>
-                    <br>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- <app-editblog></app-editblog> -->
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal()">
-    Launch demo modal
-  </button> -->
-  
-  <!-- Modal -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" #basicModal style="width: 100%;">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closeBtn>
-            <span aria-hidden="true" >&times;</span>
-          </button>
-        </div>
-        <div class="modal-body"> -->
-          ...
-          <form
+<!--<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>-->
+<div style="margin-left: 50px;">
+<p>editblogs works!{{dataToTakeAsInput}}</p>
+
+<form
               id="blog-form"
               class="form" 
               (ngSubmit)="onEditBlogSubmit()"
@@ -59,7 +18,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="title">Title :</label>
+                    <label for="title" >Title</label>
                     <input
                       type="text"
                       id="title"
@@ -146,7 +105,7 @@
                   </div>
   
                   <div class="text-center">
-                    <button class="btn btn-success"  >Update Blog</button>
+                    <button class="btn btn-success" >Update Blog</button>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -159,11 +118,16 @@
                
               </div>
             </form>
-         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> 
+            <div class="modal-footer"><button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" #closeBtn>
+                <span aria-hidden="true">&times;</span>
+              </button>
+    <button type="button" class="btn btn-light" (click)="activeModal.close('Close click')"  #closeBtn>Close</button>
+  </div>
+</div>
+<!--<div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>-->

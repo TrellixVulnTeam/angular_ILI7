@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AddBlogComponent } from './blog/add-blog/add-blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
@@ -16,18 +16,23 @@ const routes: Routes = [
   { path: 'blog', component:BlogComponent,
   children: [
     { path: '', component: BlogListComponent },
-    { path: 'new', component: AddBlogComponent},
+    { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
+    // { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
     // { path: 'myblog', component: MyblogComponent },
-    { path: ':id/edit', component: EditblogComponent },
+    { path: ':id/edit', component: EditblogComponent , canActivate: [AuthGuard]  },
     { path: ':id', component: BlogDetailComponent},
   ]  },
   { path: 'myblog', component: MyblogComponent },
   { path: 'signup', component:  SignupComponent},
   { path: 'login', component:  LoginComponent},
 ];
+const routerOption:ExtraOptions={
+  scrollPositionRestoration:'enabled',
+  anchorScrolling:'enabled',
+};
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),CommonModule,],
+  imports: [RouterModule.forRoot(routes,routerOption),CommonModule,],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

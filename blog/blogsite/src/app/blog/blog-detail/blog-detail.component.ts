@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -12,7 +12,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   templateUrl: './blog-detail.component.html',
   styleUrls: ['./blog-detail.component.css']
 })
-export class BlogDetailComponent implements OnInit, OnDestroy {
+export class BlogDetailComponent implements OnInit,AfterContentInit,OnDestroy {
   blogid:number;
   blog:Blog;
   modalOpen = false;
@@ -31,6 +31,8 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   dropdownSettings = {};
   editMode = false;
   blogCurrent:Blog;
+
+  // isLoginUser='';
   constructor(private blogService: BlogService,private auth:AuthService,
     private router: Router,
     private route: ActivatedRoute,
@@ -62,6 +64,13 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       allowSearchFilter: true,
     };
 
+    if(this.auth.loginUserNameOrEmail!=''){
+      // alert("please login first");
+      // console.log(this.auth.loginUser.next(this.isLoginUser)+"aa");
+      // this.isLoginUser=this.auth.loginUserNameOrEmail;
+      // this.router.navigate(['/login']);
+    }
+
     this.author=(this.auth.loginUserNameOrEmail);
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -71,8 +80,11 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       this.title=this.blogCurrent.title;
       this.selectedItems=this.blogCurrent.language;
       this.date1=this.blogCurrent.date;
-      console.log(this.selectedItems +" date "+this.date1);
+      // console.log(this.selectedItems +" date "+this.date1);
     });
+  }
+  ngAfterContentInit(){
+      console.log('aaaaaaaaaa');
   }
   onSelectAll(items: any) {
     console.log(items);
@@ -81,19 +93,20 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   onItemSelect(item: any) {
     console.log(item);
   }
+  
 
   private initForm() {
    
     if (this.editMode) {
       const blog = this.blogService.getBlog(this.id);
       // this.title = blog.title.toString();
-      console.log(blog);
+      // console.log(blog);
    
     }
   }
   onEditBlogSubmit() {
     // console.log(this.updateForm.value);
-    this.blogService.updateBlogs(this.id, this.updateForm.value);
+    this.blogService.updateBlogs(this.id, this.updateForm.value,this.date1);
     this.router.navigate(['/blog/']);
     let myTag = this.el.nativeElement.querySelector("div");
     // myTag.classList.remove('modal-backdrop fade show'); 
@@ -119,6 +132,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   toggleModal() {
     this.modalOpen = !this.modalOpen;
+    // this.router.navigate['/edit' ]
   }
   openXl(content) {
     // this.modalService.open(content, { size: 'xl' });

@@ -30,7 +30,7 @@ export class BlogListComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogss=this.blogSerice.getBlogs();
-    console.log(this.blogs);
+    // console.log(this.blogs);
     
     this.blogSerice.newBlog.subscribe(
       () => {
@@ -45,6 +45,7 @@ export class BlogListComponent implements OnInit {
         }
       }
     )
+    // console.log(this.blogs)
     // this.addBlogs(0, this.sum);
 
   }
@@ -58,7 +59,7 @@ export class BlogListComponent implements OnInit {
     }
   }
   onScrollDown () {
-    console.log('scrolled!!');
+    // console.log('scrolled!!');
 
     // add another 20 items
     const start = this.sum;

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
@@ -8,10 +8,16 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit {
   loginUserName:string;
   subscription: Subscription;
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService,public translate: TranslateService) { 
+     translate.addLangs(['en', 'fr','hi']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|fr|hi/) ? browserLang : 'en');
+  }
 
   ngOnInit(): void {
     this.subscription = this.authService.loginUser.subscribe(
@@ -19,20 +25,14 @@ export class HeaderComponent implements OnInit,OnDestroy {
         this.loginUserName = loginUser;
       }
     )
-    console.log(this.loginUserName)
+    // console.log(this.loginUserName)
   }
 
   logOut(){
     this.authService.logOut();
   }
 
-  selectedLan(lang){
-    console.log(lang);
-    // this.translate.use('hn');
-  }
-  ngOnDestroy(){
-    // this.subscription.unsubscribe();
-  }
+  
 
 
 }

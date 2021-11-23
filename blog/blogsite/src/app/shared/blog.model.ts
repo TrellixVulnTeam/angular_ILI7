@@ -14,7 +14,7 @@ export class Blog {
         imageUrl: string,
         author: string,
         language: { ['item_id']: number; ['item_text']: string }[],
-        date: Date,
+        date?: Date,
         // publishBy: number = null
       ) {
         this.id = id;

@@ -1,0 +1,17 @@
+{
+  "HOME": {
+    "TITLE": "Bonjour Angular avec ngx-translate !",
+    "SELECT": "Changer la langue",
+    "home": "घर",
+    "My blog": "मेरा ब्लॉग",
+    "loginUserName": "लॉग इन यूज़रनेम",
+    "SignUp/Login": "प्रवेश के लिए लग इन करना",
+    "Log out": "लॉग आउट",
+    
+    "Blog": "ब्लॉग",
+    "All rights reserved © 2021": "सर्वाधिकार सुरक्षित © 2021",
+    "Copyright": "कॉपीराइट",
+    "Communication": "संचार"
+
+  }
+}
