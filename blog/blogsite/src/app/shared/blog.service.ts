@@ -10,6 +10,7 @@ import { Blog } from './blog.model';
 export class BlogService {
   updateBlog=new Subject();
   newBlog = new Subject();
+  j;
   blogs:Blog[]=[
     new Blog(
       0,
@@ -88,7 +89,7 @@ export class BlogService {
       'jj',
       'bbdddb',
       'https://images.pexels.com/photos/461429/pexels-photo-461429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'auth553',
+      'tulesh.g@prominentpixel.com',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -97,7 +98,7 @@ export class BlogService {
       'kk',
       'bbdddb',
       'https://images.pexels.com/photos/461421/pexels-photo-461421.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'tulesh.g@prominentpixel.com',
+      'aaa',
       [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
@@ -114,7 +115,7 @@ export class BlogService {
   constructor(private authService: AuthService,private router: Router) { }
 
   getLatestIndexOfBlog(){
-    return this.blogs.length;
+    return (this.blogs.length);
   }
 
   getBlogs(){
@@ -150,16 +151,47 @@ export class BlogService {
     this.newBlog.next();
   }
 
-  deleteBlog(id: number){
+  deleteBlog(id){
+    /*for(let j=0;j<this.getLatestIndexOfBlog();j++){
+      if(this.blogs[j].id==id){
+        
+        console.log(this.blogs[j])
+        // this.blogs[id] = updateBlog;
+        // this.blogs.splice(this.blogs[j].id,1);
+        this.blogs=this.blogs.filter(item => item.id !== id);
+        // this.blogs[j]={};
+        console.log('aaaaaaaaaa'+this.blogs.filter(item => item.id !== id))
+      }
+
+    }*/
+    this.blogs = this.blogs.filter((item) => item.id  !== id);
+
+   /* const index: number = this.blogs.indexOf(id);
+    console.log(this.blogs[0].id)
+    if (index !== -1) {
+        this.blogs.splice(index, 1);
+    }   */
+    
+    // this.RemoveElementFromArray(id);
+    // this.blogs.splice(id,1);
+    this.updateBlog.next(this.blogs.slice());
+    // this.updateBlog.next();
+    this.newBlog.next();
+    // alert("Blog deleted successfuly");
+    // this.router.navigate(['../'])
+  }
+  RemoveElementFromArray(id){
+    this.blogs.forEach((value,index)=>{
+      if(value==id) this.blogs.splice(index,1);
+  });
+  }
+
+  deleteBlogs(id:number) {
     this.blogs.splice(id,1);
     this.updateBlog.next(this.blogs.slice());
     // this.updateBlog.next();
     this.newBlog.next(this.blogs.slice());
     // alert("Blog deleted successfuly");
     // this.router.navigate(['../'])
-  }
-
-  deleteBlogs(id:number) {
-
   }
 }

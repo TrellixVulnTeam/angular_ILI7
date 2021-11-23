@@ -32,21 +32,21 @@
     </thead>
     <tbody>
       
-      <tr *ngFor="let myfinalblog of myfinalblog;let i1 = index">
-        <th scope="row">{{myfinalblog.id}}</th>
-        <td> <img class="rounded-top" src="{{myfinalblog.imageUrl}}" alt="..." style="max-width:350px; max-height:280px"></td>
-        <td>{{myfinalblog.title}}</td>
-        <td><p class="display-30" [innerHTML]="myfinalblog.description" (click)="onDetail(myfinalblog.id)"></p></td>
+      <tr *ngFor="let myfinalblogone of myfinalblog;let i1 = index">
+        <th scope="row">{{myfinalblogone.id}}</th>
+        <td> <img class="rounded-top" src="{{myfinalblogone.imageUrl}}" alt="..." style="max-width:350px; max-height:280px"></td>
+        <td>{{myfinalblogone.title}}</td>
+        <td><p class="display-30" [innerHTML]="myfinalblogone.description" (click)="onDetail(myfinalblogone.id)"></p></td>
         <td>
-            <!-- <button type="button" class="btn btn-primary"  (click)="toggleModal(myfinalblog.id)">
+            <!-- <button type="button" class="btn btn-primary"  (click)="toggleModal(myfinalblogone.id)">
             Edit
           </button>  -->
-          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal(myfinalblog.id)">
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal(myfinalblogone.id)">
             Edit
            </button> -->
-           <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(myfinalblog.id)">Edit Blog</button>
+           <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(myfinalblogone.id)">Edit Blog</button>
         </td>
-        <td><button type="button" class="btn btn-danger" (click)="onDelete(myfinalblog.id)">
+        <td><button type="button" class="btn btn-danger" (click)="onDelete(myfinalblogone.id)">
             Delete
           </button></td>
       </tr>

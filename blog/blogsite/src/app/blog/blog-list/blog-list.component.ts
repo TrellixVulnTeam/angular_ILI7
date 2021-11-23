@@ -78,7 +78,7 @@ export class BlogListComponent implements OnInit {
   }
   deleteBlog(id:number){
     console.log(id);
-    this.blogSerice.deleteBlog(id);
+    this.blogSerice.deleteBlogs(id);
     // this.router.navigate(['../'],{relativeTo: this.route});
   }
   
