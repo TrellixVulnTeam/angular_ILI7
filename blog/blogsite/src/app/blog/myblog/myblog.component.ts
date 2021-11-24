@@ -1,5 +1,5 @@
 import { Route } from '@angular/compiler/src/core';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -15,7 +15,7 @@ import { EditblogsComponent } from '../editblogs/editblogs.component';
   templateUrl: './myblog.component.html',
   styleUrls: ['./myblog.component.css'],
 })
-export class MyblogComponent implements OnInit {
+export class MyblogComponent implements OnInit,OnChanges {
   myblognumber: boolean = false;
   myblog;
   blogone;
@@ -23,7 +23,8 @@ export class MyblogComponent implements OnInit {
   b;
   c;
   i;
-  myfinalblog: Blog[] = [];
+  myfinalblog=[];
+  blogdetail;
 
   modalOpen = false;
   dataPassToChild: any = '12';
@@ -51,7 +52,6 @@ export class MyblogComponent implements OnInit {
     this.blogone = this.authService.loginUserNameOrEmail;
     // this.blogone="author2222"
     this.myblog = this.blogService.getauther(this.blogone);
-    this.a = this.myblog[0].author;
     for (
       this.i = 0;
       this.i < this.blogService.getLatestIndexOfBlog();
@@ -62,7 +62,9 @@ export class MyblogComponent implements OnInit {
         // this.b=this.myblog[this.i].id;
         // console.log(this.myblog[this.i].id);
         this.myblognumber = true;
-        this.myfinalblog.push(this.blogService.getBlog(this.myblog[this.i].id));
+        this.myfinalblog.push(
+          this.blogService.getblogbyid(this.i)
+          );
       }
       // this.c=this.blogService.getBlog(this.b);
 
@@ -83,7 +85,7 @@ export class MyblogComponent implements OnInit {
         this.b=this.myblog[this.i].id;
         // console.log(this.myblog[this.i].id);
         this.myblognumber=true;
-        this.myfinalblog.push(this.blogService.getBlog(this.myblog[this.i].id));
+        this.myfinalblog.push(this.blogService.getBlog(this.i));
       }
       this.c=this.blogService.getBlog(this.b);
       
@@ -98,29 +100,49 @@ export class MyblogComponent implements OnInit {
       //     break;
       //   }
       //   this.blogs.push(this.blogSerice.getBlog(i));
-      //   // this.blogs=this.blogSerice.blogs;
+      //  // this.blogs=this.blogSerice.blogs;
       // }
-      console.log(this.blogService.getLatestIndexOfBlog());
+      
+      /*console.log(this.blogService.getLatestIndexOfBlog());
       console.log(this.blogService.getBlogs());
       for (
         this.i = 0;
         this.i < this.blogService.getLatestIndexOfBlog();
         this.i++
       ) {
-        // this.a=this.myblog[this.i].author;
-        console.log()
+        if(this.myblog[this.i].author==undefined){
+          console.log(this.myblog[this.i].author);
+            break;
+        }
         if (this.blogone == this.myblog[this.i].author) {
-          // this.b=this.myblog[this.i].id;
-          // console.log(this.myblog[this.i].id);
           this.myblognumber = true;
           this.myfinalblog.push(
-            this.blogService.getBlog(this.myblog[this.i].id)
+            this.blogService.getblogbyid(this.i)
           );
         }
-        // this.c=this.blogService.getBlog(this.b);
-
-        // console.log(this.c);
+      }*/
+      this.blogone = this.authService.loginUserNameOrEmail;
+    // this.blogone="author2222"
+    this.myblog = this.blogService.getauther(this.blogone);
+    for (
+      this.i = 0;
+      this.i < this.blogService.getLatestIndexOfBlog();
+      this.i++
+    ) {
+      // this.a=this.myblog[this.i].author;
+      if (this.blogone == this.myblog[this.i].author) {
+        // this.b=this.myblog[this.i].id;
+        // console.log(this.myblog[this.i].id);
+        this.myblognumber = true;
+        this.myfinalblog.push(
+          this.blogService.getblogbyid(this.i)
+          );
       }
+      // this.c=this.blogService.getBlog(this.b);
+
+      // console.log(this.c);
+    }
+      
     });
 
     /*------------------edit*/
@@ -167,8 +189,10 @@ export class MyblogComponent implements OnInit {
     this.date1 = this.blogCurrent.date;
   }
 
-  onDetail(id) {
-    this.router.navigate(['../blog/' + id], { relativeTo: this.route });
+  onDetail(id,title) {
+    this.blogdetail=this.blogService.getBlogDetails(id,title);
+    console.log(this.blogdetail);
+    this.router.navigate(['../blog/' + this.blogdetail], { relativeTo: this.route });
   }
   onEdit(id) {
     this.router.navigate(['../blog/' + id + '/edit'], {
@@ -187,7 +211,7 @@ export class MyblogComponent implements OnInit {
     this.blogService.deleteBlog(id);
     // this.router.navigate(['../this.myblog'],{relativeTo: this.route});
   }
-  openModalDialogCustomClass(content) {
+  openModalDialogCustomClass(content,id) {
     // this.modalService.open(content, { modalDialogClass: 'dark-modal' });
     // this.modalService.open(EditblogsComponent, { modalDialogClass: 'dark-modal' });
     const modalRef = this.modalService.open(EditblogsComponent, {
@@ -205,7 +229,31 @@ export class MyblogComponent implements OnInit {
       .catch((result) => {
         console.log(result);
       });
+      this.blogService.editBlogModal=id;
   }
 
   onEditBlogSubmit() {}
+  ngOnChanges(){
+    this.blogone = this.authService.loginUserNameOrEmail;
+    // this.blogone="author2222"
+    this.myblog = this.blogService.getauther(this.blogone);
+    for (
+      this.i = 0;
+      this.i < this.blogService.getLatestIndexOfBlog();
+      this.i++
+    ) {
+      // this.a=this.myblog[this.i].author;
+      if (this.blogone == this.myblog[this.i].author) {
+        // this.b=this.myblog[this.i].id;
+        // console.log(this.myblog[this.i].id);
+        this.myblognumber = true;
+        this.myfinalblog.push(
+          this.blogService.getblogbyid(this.i)
+          );
+      }
+      // this.c=this.blogService.getBlog(this.b);
+
+      // console.log(this.c);
+    }
+  }
 }

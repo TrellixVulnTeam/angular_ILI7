@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import { EditblogsComponent } from './blog/editblogs/editblogs.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 // AoT requires an exported function for factories
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EditblogComponent,
     MyblogComponent,
     EditblogsComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
  

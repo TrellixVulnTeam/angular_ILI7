@@ -45,9 +45,9 @@
         [infiniteScrollDistance]="scrollDistance"
         [infiniteScrollThrottle]="scrollThrottle"
         [scrollWindow]="false"
-        (scrolled)="onScrollDown()" style="height: 50vh; overflow: scroll; width: 70%;">
+        (scrolled)="onScrollDown()" style="height: 50vh; overflow: scroll; width: 70%; border: 1px solid black">
     <a class="list-group" style="height: auto;" *ngFor="let i of blogs;let i1 = index" >
-      <div class="list-group-item list-group-item-action" >
+      <div class="list-group-item list-group-item-action" *ngIf="i!=NULL" >
         <div (click)="blogShowDetail(i1)">
 
           <h2 class="mb-1">{{i.title}}</h2>
