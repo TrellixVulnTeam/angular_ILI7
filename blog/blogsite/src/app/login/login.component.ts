@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm:NgForm;
   isUsername: boolean = true;
   isEmail: boolean = false;
+  isLoading=  false;
   constructor(private authService:AuthService,
     private router:Router) { }
 
@@ -19,12 +21,15 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit(){
+    this.isLoading=true;
     if(!this.loginForm.valid){
       alert("invalid credentials!!");
       return false;
     }
+    
     this.authService.login(this.loginForm.value);
     this.router.navigate(['blog']);
+    this.isLoading=false;
   }
 
   onChangeSecondInputField(value) {

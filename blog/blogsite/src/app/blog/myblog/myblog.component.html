@@ -19,7 +19,7 @@
 
 <div style="background-color: #17a2b8; padding-bottom: 50px;" >
     <div class="container">
-<table class="table table-bordered table-dark" style="border-collapse: collapse ">
+<table class="table table-bordered table-dark" style="border-collapse: collapse " *ngIf="myfinalblog.length>0  else elseBlock">
     <thead>
       <tr>
         <th scope="col">No</th>
@@ -36,7 +36,7 @@
         <th scope="row">{{myfinalblogone.id}}</th>
         <td> <img class="rounded-top" src="{{myfinalblogone.imageUrl}}" alt="..." style="max-width:350px; max-height:280px"></td>
         <td>{{myfinalblogone.title}}</td>
-        <td><p class="display-30" [innerHTML]="myfinalblogone.description" (click)="onDetail(myfinalblogone.id)"></p></td>
+        <td><p class="display-30" [innerHTML]="myfinalblogone.description" (click)="onDetail(myfinalblogone.id,myfinalblogone.title)"></p></td>
         <td>
             <!-- <button type="button" class="btn btn-primary"  (click)="toggleModal(myfinalblogone.id)">
             Edit
@@ -44,7 +44,7 @@
           <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="toggleModal(myfinalblogone.id)">
             Edit
            </button> -->
-           <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(myfinalblogone.id)">Edit Blog</button>
+           <button class="btn btn-outline-primary mb-2 mr-2" (click)="openModalDialogCustomClass(myfinalblogone.title,myfinalblogone.id)">Edit Blog</button>
         </td>
         <td><button type="button" class="btn btn-danger" (click)="onDelete(myfinalblogone.id)">
             Delete
@@ -53,6 +53,7 @@
       
     </tbody>
   </table>
+  <ng-template #elseBlock>No one post created by you.</ng-template>
   </div>
   </div>
   <!-- <app-editblog></app-editblog> -->

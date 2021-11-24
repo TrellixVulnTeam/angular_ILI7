@@ -10,6 +10,7 @@ import { Blog } from './blog.model';
 export class BlogService {
   updateBlog=new Subject();
   newBlog = new Subject();
+  editBlogModal ;
   j;
   blogs:Blog[]=[
     new Blog(
@@ -122,10 +123,31 @@ export class BlogService {
     return this.blogs;
   }
 
+  getblogbyid(id){
+    for(let i=0;i<this.getLatestIndexOfBlog();i++){
+      if(id==this.blogs[i].id){
+        console.log(this.blogs[i].id)
+        return this.blogs[id];
+      }
+      // console.log(this.blogs[i].id)
+    }
+    // console.log(id)
+  }
+  getBlogByTitle(title,id1){
+    for(let i=0;i<this.getLatestIndexOfBlog();i++){
+      if((title==this.blogs[i].title) && (id1==this.blogs[i].id)){
+        console.log(this.blogs[i].title)
+        return this.blogs[i];
+      }
+      // console.log(this.blogs[i].title)
+    }
+  }
+
   getBlog(index: number) {
     
     return this.blogs[index];
   }
+
 
   addBlog(newBlog: Blog) {
     this.blogs.push(newBlog);
@@ -135,6 +157,18 @@ export class BlogService {
   getauther(auth) {
     return this.blogs;
   } 
+
+  getBlogDetails(id: number,title: string){
+    for(let i=0;i<this.getLatestIndexOfBlog();i++){
+      if((title==this.blogs[i].title) && (id==this.blogs[i].id)){
+        // this.blogs.findIndex(id);
+        this.blogs.findIndex(item => item.id === id)
+        console.log(this.blogs.findIndex(item => item.id === id));
+        return this.blogs.findIndex(item => item.id === id);
+      }
+      // console.log(this.blogs[i].title)
+    }
+  }
 
   updateBlogs(index: number, newBlog,date:any) {
     console.log(index)
@@ -174,9 +208,12 @@ export class BlogService {
     
     // this.RemoveElementFromArray(id);
     // this.blogs.splice(id,1);
-    this.updateBlog.next(this.blogs.slice());
+    this.updateBlog.next();
     // this.updateBlog.next();
     this.newBlog.next();
+    this.updateBlog.next(this.blogs.slice());
+    // this.updateBlog.next();
+    this.newBlog.next(this.blogs.slice());
     // alert("Blog deleted successfuly");
     // this.router.navigate(['../'])
   }

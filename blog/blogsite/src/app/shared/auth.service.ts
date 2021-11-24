@@ -9,19 +9,23 @@ import { User } from './user';
 export class AuthService {
   loginUser = new Subject<string>();
   isLogin:boolean=false;
-  loginUserNameOrEmail='tulesh.g@prominentpixel.com';
+  loginUserNameOrEmail='';
+  isLoading=  false;
 
   constructor(private route: ActivatedRoute,private router:Router) { }
 
   login(user:User){
+    this.isLoading=true;
     this.isLogin=true;
     if(user.username){
       this.loginUserNameOrEmail=user.username;
       localStorage.setItem("token_name", "user.username");
       console.log(localStorage.setItem("token_name", user.username));
+      this.isLoading=false;
     }
     else{
       this.loginUserNameOrEmail=user.email;
+      this.isLoading=false;
     }
 
     this.loginUser.next(this.loginUserNameOrEmail);

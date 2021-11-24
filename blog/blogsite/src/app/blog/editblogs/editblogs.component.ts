@@ -14,7 +14,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EditblogsComponent implements OnInit {
   @Input() dataToTakeAsInput: any;
-
+  
   @ViewChild('f') updateForm: NgForm;
   @ViewChild('closeBtn') closeBtn: ElementRef;
   public Editor = ClassicEditor;
@@ -36,6 +36,7 @@ export class EditblogsComponent implements OnInit {
     private route:ActivatedRoute,public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    console.log(this.blogService.editBlogModal);
     this.dropdownList = [
       { item_id: 1, item_text: 'html' },
       { item_id: 2, item_text: 'css' },
@@ -68,19 +69,24 @@ export class EditblogsComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item);
   }
-  initForm(id) {
+  initForm(dataToTakeAsInput) {
    
     // if (this.editMode) 
     {
-      const blog = this.blogService.getBlog(id);
+      const blog = this.blogService.getBlogByTitle(dataToTakeAsInput,this.blogService.editBlogModal);
       // this.title = blog.title.toString();
       // console.log(blog);
    
     }
-    this.blogCurrent=this.blogService.getBlog(id);
+    this.blogCurrent=this.blogService.getBlogByTitle(dataToTakeAsInput,this.blogService.editBlogModal);
+    console.log(this.blogCurrent);
     this.title=this.blogCurrent.title;
     this.selectedItems=this.blogCurrent.language;
     this.date1=this.blogCurrent.date;
+    this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal)
+    console.log(this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal))
+    this.dataToTakeAsInput=this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal);
+
   }
 
   onEditBlogSubmit(){
