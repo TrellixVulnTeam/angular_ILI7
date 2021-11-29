@@ -43,9 +43,13 @@ export class JobListComponent implements OnInit,OnChanges {
   }
   
   onReLoad(){}
-  onEdit(){
+  onEdit(id:number){
     // this.router.navigate(['edit'],{relativeTo:this.route,queryParamsHandling:'preserve'});
-    this.router.navigate(['/jobs',this.job.id,'edit']);
+    // this.router.navigate(['/jobs',this.job.id,'edit']);
+    this.router.navigate([id, 'edit'], {relativeTo: this.route});
+  }
+  jobShowDetail(id:number){
+    this.router.navigate([id, ], {relativeTo: this.route});
   }
 
 }

@@ -9,12 +9,12 @@
       
             <!-- <tr> -->
               <!-- <td >{{i+1}}</td> -->
-              <td>{{jobone.id}}</td>
-              <td>{{jobone.title}}</td>
-              <td>{{jobone.company}}</td>
-              <td>{{jobone.place}}</td>
-              <td>{{jobone.time}}</td>
-              <td><button class="btn btn-primary" (click)="onEdit()">
+              <td (click)="jobShowDetail(job.id)">{{job.id}}</td>
+              <td (click)="jobShowDetail(job.id)">{{job.title}}</td>
+              <td (click)="jobShowDetail(job.id)">{{jobone.company}}</td>
+              <td (click)="jobShowDetail(job.id)">{{jobone.place}}</td>
+              <td (click)="jobShowDetail(job.id)">{{jobone.time}}</td>
+              <td ><button class="btn btn-primary" (click)="onEdit(job.id)">
                 Edit server
             </button></td>
             
