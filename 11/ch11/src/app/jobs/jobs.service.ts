@@ -1,3 +1,5 @@
+import { Job } from "./job.model";
+
 export class jobService {
 job = [
     {
@@ -35,4 +37,17 @@ job = [
     );
     return job;
   }
+
+  addNewJob(newJob: Job){
+    this.job.push(newJob);
+  } 
+
+  getLengthOfJobsArray(){
+    return this.job.length;
+  }
+
+  getTime(){
+    const time = new Date();
+    return `${time.getDate()}-${time.getMonth()}-${time.getFullYear()}  ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+}
 }
