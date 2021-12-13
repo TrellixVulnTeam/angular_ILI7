@@ -10,37 +10,29 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('f') loginForm:NgForm;
+  @ViewChild('loginForm') loginForm: NgForm;
   isUsername: boolean = true;
-  isEmail: boolean = false;
-  isLoading=  false;
-  constructor(private authService:AuthService,
-    private router:Router) { }
+  
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onLoginSubmit(){
-    this.isLoading=true;
-    if(!this.loginForm.valid){
+  onLoginSubmit() {
+    if (!this.loginForm.valid) {
       alert("invalid credentials!!");
       return false;
     }
-    
     this.authService.login(this.loginForm.value);
     this.router.navigate(['blog']);
-    this.isLoading=false;
   }
 
   onChangeSecondInputField(value) {
     if (value == 'username') {
-    this.isUsername = true; this.isEmail = false;
-
+      this.isUsername = true;
     } else if (value == 'email') {
-    this.isEmail = true; this.isUsername = false; 
-  }
-  else{
-
+      this.isUsername = false;
     }
   }
 }

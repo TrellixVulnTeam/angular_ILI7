@@ -5,21 +5,23 @@ import { AuthService } from './auth.service';
 import { Blog } from './blog.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BlogService {
-  updateBlog=new Subject();
-  newBlog = new Subject();
-  editBlogModal ;
-  j;
-  blogs:Blog[]=[
+  updateBlog = new Subject();
+  editBlogModal;
+
+  blogs: Blog[] = [
     new Blog(
       0,
       'aaa',
       'bbb',
       'https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg',
       'aa',
-      [{ item_id: 1, item_text: 'HTML' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 1, languageName: 'HTML' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 10, 14)
     ),
     new Blog(
@@ -28,7 +30,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'auth555',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -37,7 +42,10 @@ export class BlogService {
       'bbb',
       'https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'tulesh.g@prominentpixel.com',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 10, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -46,7 +54,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'author111',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -55,7 +66,10 @@ export class BlogService {
       'bbb',
       'https://images.pexels.com/photos/326279/pexels-photo-326279.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'author2',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -64,7 +78,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'tulesh.g@prominentpixel.com',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -73,7 +90,10 @@ export class BlogService {
       'bbb',
       'https://images.pexels.com/photos/704971/pexels-photo-704971.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'auth1',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -82,7 +102,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/461428/pexels-photo-461428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'author2222',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -91,7 +114,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/461429/pexels-photo-461429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'tulesh.g@prominentpixel.com',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -100,7 +126,10 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/461421/pexels-photo-461421.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'aaa',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
     new Blog(
@@ -109,126 +138,94 @@ export class BlogService {
       'bbdddb',
       'https://images.pexels.com/photos/461422/pexels-photo-461422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'author2222',
-      [{ item_id: 5, item_text: 'reactJs' }, { item_id: 6, item_text: 'PHP' }],
+      [
+        { languageId: 5, languageName: 'reactJs' },
+        { languageId: 6, languageName: 'PHP' },
+      ],
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
   ];
-  constructor(private authService: AuthService,private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  getLatestIndexOfBlog(){
-    return (this.blogs.length);
+  getLatestIndexOfBlog() {
+    return this.blogs.length;
   }
 
-  getBlogs(){
+  getBlogs() {
     return this.blogs;
   }
 
-  getblogbyid(id){
-    for(let i=0;i<this.getLatestIndexOfBlog();i++){
-      if(id==this.blogs[i].id){
-        console.log(this.blogs[i].id)
-        return this.blogs[id];
+  getBlogByTitle(id) {
+    /*var tempBlog;
+    this.blogs.forEach(blog => {
+      
+      if ( id == blog.id) {
+        tempBlog=blog;
+        console.log(blog);
+        console.log(typeof blog);
+        console.log(blog.title);
+        
       }
-      // console.log(this.blogs[i].id)
-    }
-    // console.log(id)
-  }
-  getBlogByTitle(title,id1){
-    for(let i=0;i<this.getLatestIndexOfBlog();i++){
-      if((title==this.blogs[i].title) && (id1==this.blogs[i].id)){
-        console.log(this.blogs[i].title)
-        return this.blogs[i];
+      return [...tempBlog];
+    })*/
+    for (var blog of this.getBlogs()) {
+      if (id == blog.id) {
+        return blog;
       }
-      // console.log(this.blogs[i].title)
     }
+
+    // for (let i = 0; i < this.getLatestIndexOfBlog(); i++) {
+    //   if (title == this.blogs[i].title && id == this.blogs[i].id) {
+    //     console.log(this.blogs[i]);
+    //         console.log(typeof this.blogs[i]);
+    //     return this.blogs[i];
+    //   }
+    // }
   }
 
   getBlog(index: number) {
-    
     return this.blogs[index];
   }
-
 
   addBlog(newBlog: Blog) {
     this.blogs.push(newBlog);
   }
 
-
-  getauther(auth) {
-    return this.blogs;
-  } 
-
-  getBlogDetails(id: number,title: string){
-    for(let i=0;i<this.getLatestIndexOfBlog();i++){
-      if((title==this.blogs[i].title) && (id==this.blogs[i].id)){
-        // this.blogs.findIndex(id);
-        this.blogs.findIndex(item => item.id === id)
-        console.log(this.blogs.findIndex(item => item.id === id));
-        return this.blogs.findIndex(item => item.id === id);
-      }
-      // console.log(this.blogs[i].title)
-    }
+  getBlogById(id) {
+    return this.blogs.findIndex((item) => item.id === id);
   }
 
-  updateBlogs(index: number, newBlog,date:any) {
-    console.log(index)
+  updateBlogs(index: number, newBlog, date: any) {
     this.blogs[index] = newBlog;
     this.blogs[index].date = date;
     this.updateBlog.next(this.blogs.slice());
-    this.newBlog.next();
   }
 
-  editBlog(id: number, updateBlog: Blog){
-    this.blogs[id] = updateBlog;
-    
+  deleteBlog(id) {
+    this.blogs = this.blogs.filter((item) => item.id !== id);
     this.updateBlog.next();
-    this.newBlog.next();
   }
 
-  deleteBlog(id){
-    /*for(let j=0;j<this.getLatestIndexOfBlog();j++){
-      if(this.blogs[j].id==id){
-        
-        console.log(this.blogs[j])
-        // this.blogs[id] = updateBlog;
-        // this.blogs.splice(this.blogs[j].id,1);
-        this.blogs=this.blogs.filter(item => item.id !== id);
-        // this.blogs[j]={};
-        console.log('aaaaaaaaaa'+this.blogs.filter(item => item.id !== id))
-      }
-
-    }*/
-    this.blogs = this.blogs.filter((item) => item.id  !== id);
-
-   /* const index: number = this.blogs.indexOf(id);
-    console.log(this.blogs[0].id)
-    if (index !== -1) {
-        this.blogs.splice(index, 1);
-    }   */
-    
-    // this.RemoveElementFromArray(id);
-    // this.blogs.splice(id,1);
-    this.updateBlog.next();
-    // this.updateBlog.next();
-    this.newBlog.next();
-    this.updateBlog.next(this.blogs.slice());
-    // this.updateBlog.next();
-    this.newBlog.next(this.blogs.slice());
-    // alert("Blog deleted successfuly");
-    // this.router.navigate(['../'])
-  }
-  RemoveElementFromArray(id){
-    this.blogs.forEach((value,index)=>{
-      if(value==id) this.blogs.splice(index,1);
-  });
+  getLanguages() {
+    return [
+      { languageId: 1, languageName: 'html' },
+      { languageId: 2, languageName: 'css' },
+      { languageId: 3, languageName: 'javascript' },
+      { languageId: 4, languageName: 'angular' },
+      { languageId: 5, languageName: 'reactJs' },
+      { languageId: 6, languageName: 'PHP' },
+    ];;
   }
 
-  deleteBlogs(id:number) {
-    this.blogs.splice(id,1);
-    this.updateBlog.next(this.blogs.slice());
-    // this.updateBlog.next();
-    this.newBlog.next(this.blogs.slice());
-    // alert("Blog deleted successfuly");
-    // this.router.navigate(['../'])
+  dropdownSettingsfunction() {
+    return {
+      singleSelection: false,
+      idField: 'languageId',
+      textField: 'languageName',
+      languageSelectAll: 'Select All',
+      languageUnselectAll: 'UnSelect All',
+      itemsShowLimit: 5,
+      allowSearchFilter: true,
+    }
   }
 }

@@ -1,85 +1,35 @@
-// import { Route } from '@angular/compiler/src/core';
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { Router,Route, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Blog } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
-// import {ScrollingModule} from '@angular/cdk/scrolling';
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.css'],
 })
 export class BlogListComponent implements OnInit {
-  blogs:Blog[]=[];
-  blogss:Blog[]=[];
-  blogScolled:Blog[]=[];
- 
-
-  sum = 5;
+  blogs: Blog[] = [];
+  totalBlogToDisplay = 5;
   scrollDistance = 2;
-  scrollThrottle = 5;
-  constructor(private blogSerice:BlogService,
-    private router:Router,
-    private route:ActivatedRoute) { 
-      // this.blogs=this.blogSerice.getBlogs();
-      // this.appendItems();
-      for (let i = 0; i < this.sum; ++i) {
-        this.blogs.push(this.blogSerice.getBlog(i));
-      }
-    }
+  scrollThrottle = 1;
+
+  constructor(private blogSerice: BlogService,
+    private router: Router,
+    private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.blogss=this.blogSerice.getBlogs();
-    // console.log(this.blogs);
-    
-    this.blogSerice.newBlog.subscribe(
-      () => {
-        this.blogs=[];
-        for (let i = 0; i < this.sum; ++i) 
-        {
-          if(this.blogSerice.blogs[i] == null){
-            break;
-          }
-          this.blogs.push(this.blogSerice.getBlog(i));
-          // this.blogs=this.blogSerice.blogs;
-        }
-      }
-    )
-    // console.log(this.blogs)
-    // this.addBlogs(0, this.sum);
+    this.blogs = this.blogSerice.blogs.slice(0, this.totalBlogToDisplay);
+  }
 
+  onScrollDown() {
+    const latestBlogDisplay = this.totalBlogToDisplay;
+    this.totalBlogToDisplay += 5;
+    var tempArray = this.blogSerice.blogs.slice(latestBlogDisplay, this.totalBlogToDisplay);
+    this.blogs.push(...tempArray);
   }
- 
-  addBlogs(startIndex: number, endIndex: number) {
-    for (let i = startIndex; i < endIndex; ++i) {
-      if(this.blogs[i] == undefined){
-        return;
-      }
-      this.blogs.push(this.blogs[i]);
-    }
-  }
-  onScrollDown () {
-    // console.log('scrolled!!');
 
-    // add another 20 items
-    const start = this.sum;
-    this.sum += 5;
-    for (let i = start; i < this.sum; ++i) {
-      if(this.blogSerice.getBlog(i)==null){
-        break;
-      }
-      this.blogs.push(this.blogSerice.getBlog(i));
-    }
+  blogShowDetail(id: number) {
+    this.router.navigate([+id], { relativeTo: this.route });
   }
- 
-  blogShowDetail(id:number){
-    console.log(id);
-    this.router.navigate([+id],{relativeTo: this.route});
-  }
-  deleteBlog(id:number){
-    console.log(id);
-    this.blogSerice.deleteBlogs(id);
-    // this.router.navigate(['../'],{relativeTo: this.route});
-  }
-  
 }

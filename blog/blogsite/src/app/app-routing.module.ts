@@ -5,7 +5,7 @@ import { AddBlogComponent } from './blog/add-blog/add-blog.component';
 import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { BlogComponent } from './blog/blog.component';
-import { EditblogComponent } from './blog/editblog/editblog.component';
+import { EditblogsComponent } from './blog/editblogs/editblogs.component';
 import { MyblogComponent } from './blog/myblog/myblog.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/auth.guard';
@@ -15,14 +15,12 @@ const routes: Routes = [
   { path: '', redirectTo: 'blog', pathMatch: 'full' },
   { path: 'blog', component:BlogComponent,
   children: [
-    { path: '', component: BlogListComponent },
+    { path: '', component: BlogListComponent }, 
     { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
-    // { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
-    // { path: 'myblog', component: MyblogComponent },
-    { path: ':id/edit', component: EditblogComponent , canActivate: [AuthGuard]  },
+    { path: ':id/edit', component: EditblogsComponent , canActivate: [AuthGuard]  },
     { path: ':id', component: BlogDetailComponent},
   ]  },
-  { path: 'myblog', component: MyblogComponent },
+  { path: 'myblog', component: MyblogComponent , canActivate: [AuthGuard] },
   { path: 'signup', component:  SignupComponent},
   { path: 'login', component:  LoginComponent},
 ];

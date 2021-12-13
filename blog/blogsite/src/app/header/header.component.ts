@@ -9,10 +9,11 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loginUserName:string;
+  loginUserName: string;
   subscription: Subscription;
-  constructor(private authService:AuthService,public translate: TranslateService) { 
-     translate.addLangs(['en', 'fr','hi']);
+
+  constructor(private authService: AuthService, public translate: TranslateService) {
+    translate.addLangs(['en', 'fr', 'hi']);
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
@@ -25,14 +26,10 @@ export class HeaderComponent implements OnInit {
         this.loginUserName = loginUser;
       }
     )
-    // console.log(this.loginUserName)
+    this.authService.getLoginDetail();
   }
 
-  logOut(){
+  logOut() {
     this.authService.logOut();
   }
-
-  
-
-
 }

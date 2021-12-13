@@ -12,11 +12,11 @@ import { AuthService } from '../shared/auth.service';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  
-  constructor(private router: Router, private authService: AuthService,private formbuilder: FormBuilder) {}
+
+  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.signupForm = this.formbuilder.group(
+    this.signupForm = this.formBuilder.group(
       {
         username: new FormControl('', [
           Validators.required,
@@ -37,11 +37,12 @@ export class SignupComponent implements OnInit {
           ),
         ]),
         confirmpassword: new FormControl('', [Validators.required]),
-      }, { 
-        validator :this.mustMatch('password','confirmpassword')
-      }
+      }, {
+      validator: this.mustMatch('password', 'confirmpassword')
+    }
     );
   }
+
   onSignUpSubmit() {
     if (!this.signupForm.valid) {
       alert('invalid credentials!! Register all detail perfectly');
@@ -51,23 +52,22 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['blog']);
     }
   }
+  
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
-        const control = formGroup.controls[controlName];
-        const matchingControl = formGroup.controls[matchingControlName];
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            // return if another validator has already found an error on the matchingControl
-            return;
-        }
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        return;
+      }
 
-        // set error on matchingControl if validation fails
-        if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
-        } else {
-            matchingControl.setErrors(null);
-        }
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
     }
-}
+  }
 
 }

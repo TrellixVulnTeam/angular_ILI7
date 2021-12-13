@@ -2,106 +2,41 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Blog } from 'src/app/shared/blog.model';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { BlogService } from 'src/app/shared/blog.service';
-import { AuthService } from 'src/app/shared/auth.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-editblogs',
-  templateUrl: './editblogs.component.html',
-  styleUrls: ['./editblogs.component.css']
+  templateUrl: './editblogs.component.html'
 })
 export class EditblogsComponent implements OnInit {
   @Input() dataToTakeAsInput: any;
-  
-  @ViewChild('f') updateForm: NgForm;
-  @ViewChild('closeBtn') closeBtn: ElementRef;
-  public Editor = ClassicEditor;
-  isLoginUser=false;
-  author:string;
-  id: number;
-  title: string="bbb";
-  titles: string="bbb";
-  date1:Date ;
-  dropdownList = [];
-  selectedItems = [];
-  dropdownSettings = {};
-  editMode = false;
-  blogCurrent:Blog;
+  @ViewChild('editBlogForm') updateForm: NgForm;
 
-  myblogedit= false;
-  constructor(private router:Router,
-    private blogService:BlogService,private authService:AuthService,
-    private route:ActivatedRoute,public activeModal: NgbActiveModal) { }
+  public descriptionEditor = ClassicEditor;
+  languagesDropdown = [];
+  languageDropdownSettings = {};
+  blogCurrent: Blog;
+
+
+  constructor(private router: Router,
+    private blogService: BlogService, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    console.log(this.blogService.editBlogModal);
-    this.dropdownList = [
-      { item_id: 1, item_text: 'html' },
-      { item_id: 2, item_text: 'css' },
-      { item_id: 3, item_text: 'javascript' },
-      { item_id: 4, item_text: 'angular' },
-      { item_id: 5, item_text: 'reactJs' },
-      { item_id: 6, item_text: 'PHP' },
-    ];
-    if(this.authService.loginUserNameOrEmail==''){
-      alert("please login first");
-      this.router.navigate(['/login']);
-    }
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true,
-    };
-    this.initForm(this.dataToTakeAsInput);
+    this.languagesDropdown = this.blogService.getLanguages();
+    this.languageDropdownSettings = this.blogService.dropdownSettingsfunction();
+    this.initForm();
   }
 
-
-  onSelectAll(items: any) {
-    console.log(items);
+  initForm() {
+    this.blogCurrent = this.blogService.getBlogByTitle(this.dataToTakeAsInput);
   }
 
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  initForm(dataToTakeAsInput) {
-   
-    // if (this.editMode) 
-    {
-      const blog = this.blogService.getBlogByTitle(dataToTakeAsInput,this.blogService.editBlogModal);
-      // this.title = blog.title.toString();
-      // console.log(blog);
-   
-    }
-    this.blogCurrent=this.blogService.getBlogByTitle(dataToTakeAsInput,this.blogService.editBlogModal);
-    console.log(this.blogCurrent);
-    this.title=this.blogCurrent.title;
-    this.selectedItems=this.blogCurrent.language;
-    this.date1=this.blogCurrent.date;
-    this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal)
-    console.log(this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal))
-    this.dataToTakeAsInput=this.blogService.blogs.findIndex(item => item.id === this.blogService.editBlogModal);
-
-  }
-
-  onEditBlogSubmit(){
-    let date=this.date1;
-    console.log(this.updateForm.value);
-    this.blogService.updateBlogs(this.dataToTakeAsInput, this.updateForm.value,this.date1);
-    console.log(this.blogService.updateBlogs(this.dataToTakeAsInput, this.updateForm.value,this.date1))
-    // return ;
-    /*if(this.myblogedit){
-    }
-    else{
-      this.blogService.updateBlogs(this.id, this.updateForm.value,this.date1);
-      this.closeBtn.nativeElement.click();
-    }*/
-    this.closeBtn.nativeElement.click();
+  onEditBlogSubmit() {
+    const id = this.blogService.blogs.findIndex(blog => blog.id === this.blogService.editBlogModal);
+    this.blogService.updateBlogs(id, this.updateForm.value, this.blogCurrent.date);
+    this.activeModal.close('Close click');
     this.router.navigate(['/myblog/']);
   }
 }

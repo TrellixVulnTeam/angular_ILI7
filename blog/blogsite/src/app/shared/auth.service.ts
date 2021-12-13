@@ -1,61 +1,52 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { User } from './user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   loginUser = new Subject<string>();
-  isLogin:boolean=false;
-  loginUserNameOrEmail='';
-  isLoading=  false;
+  isLogin: boolean = false;
+  loginUserNameOrEmail = '';
 
-  constructor(private route: ActivatedRoute,private router:Router) { }
+  constructor(private router: Router) { }
 
-  login(user:User){
-    this.isLoading=true;
-    this.isLogin=true;
-    if(user.username){
-      this.loginUserNameOrEmail=user.username;
-      localStorage.setItem("token_name", "user.username");
-      console.log(localStorage.setItem("token_name", user.username));
-      this.isLoading=false;
+  login(user: User) {
+    this.isLogin = true;
+    if (user.username) {
+      this.loginUserNameOrEmail = user.username;
+      localStorage.setItem('token_name', user.username);
+      console.log(" Localstorage save : " + localStorage.getItem('token_name'));
+    } else {
+      this.loginUserNameOrEmail = user.email;
     }
-    else{
-      this.loginUserNameOrEmail=user.email;
-      this.isLoading=false;
-    }
-
     this.loginUser.next(this.loginUserNameOrEmail);
   }
+
+  getLoginDetail() {
+    this.loginUserNameOrEmail = localStorage.getItem('token_name');
+    if (localStorage.getItem("token_name")) {
+      this.loginUserNameOrEmail = localStorage.getItem("token_name");
+      this.loginUser.next(this.loginUserNameOrEmail);
+      this.isLogin = true;
+    }
+  }
+
   getAuthStatus(): boolean {
     return this.isLogin;
   }
 
-  getUserNameOrEmail(){
+  getUserNameOrEmail() {
     return this.loginUserNameOrEmail;
   }
 
-  logOut(){
-    this.loginUserNameOrEmail='';
-    this.isLogin=false;
+  logOut() {
+    this.loginUserNameOrEmail = '';
+    this.isLogin = false;
     this.loginUser.next(this.loginUserNameOrEmail);
-    localStorage.removeItem("token_name");
-    console.log(this.router.url);
-    console.log(this.route.params);
-    if(this.route.snapshot.queryParams.fragment=='edit'){
-      this.router.navigate(['/blog/']);
-      alert("please login firstss")
-    }
-
-    if(this.router.url=='edit')
-    {
-      console.log(this.route.params+"aaaaa");
-    }
+    localStorage.removeItem('token_name');
     this.router.navigate(['/blog/']);
-    // alert('Please')
   }
-
 }
