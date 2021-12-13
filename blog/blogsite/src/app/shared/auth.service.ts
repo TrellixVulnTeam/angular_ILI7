@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { User } from './user';
+import { User } from './Model/user';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   getLoginDetail() {
-    this.loginUserNameOrEmail = localStorage.getItem('token_name');
     if (localStorage.getItem("token_name")) {
       this.loginUserNameOrEmail = localStorage.getItem("token_name");
       this.loginUser.next(this.loginUserNameOrEmail);
@@ -42,7 +41,7 @@ export class AuthService {
     return this.loginUserNameOrEmail;
   }
 
-  logOut() {
+  logout() {
     this.loginUserNameOrEmail = '';
     this.isLogin = false;
     this.loginUser.next(this.loginUserNameOrEmail);

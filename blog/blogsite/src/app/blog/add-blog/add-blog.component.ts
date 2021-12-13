@@ -21,8 +21,8 @@ export class AddBlogComponent implements OnInit {
 
   ngOnInit(): void {
     this.languagesDropdown = this.blogService.getLanguages();
-    this.languageDropdownSettings = this.blogService.dropdownSettingsfunction();
-    this.author = (this.auth.loginUserNameOrEmail);
+    this.languageDropdownSettings = this.blogService.dropdownSettings();
+    this.author = this.auth.loginUserNameOrEmail;
   }
 
   onNewBlogSubmit() {
@@ -35,7 +35,6 @@ export class AddBlogComponent implements OnInit {
       description: this.addBlogForm.value.description,
       id: this.blogService.getLatestIndexOfBlog(),
       date: new Date(),
-      publishBy: this.author,
     });
     this.router.navigate(['blog']);
   }

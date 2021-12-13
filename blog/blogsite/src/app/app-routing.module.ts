@@ -13,24 +13,26 @@ import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'blog', pathMatch: 'full' },
-  { path: 'blog', component:BlogComponent,
-  children: [
-    { path: '', component: BlogListComponent }, 
-    { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
-    { path: ':id/edit', component: EditblogsComponent , canActivate: [AuthGuard]  },
-    { path: ':id', component: BlogDetailComponent},
-  ]  },
-  { path: 'myblog', component: MyblogComponent , canActivate: [AuthGuard] },
-  { path: 'signup', component:  SignupComponent},
-  { path: 'login', component:  LoginComponent},
+  {
+    path: 'blog', component: BlogComponent,
+    children: [
+      { path: '', component: BlogListComponent },
+      { path: 'new', component: AddBlogComponent, canActivate: [AuthGuard] },
+      { path: ':id/edit', component: EditblogsComponent, canActivate: [AuthGuard] },
+      { path: ':id', component: BlogDetailComponent },
+    ]
+  },
+  { path: 'myblog', component: MyblogComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent },
 ];
-const routerOption:ExtraOptions={
-  scrollPositionRestoration:'enabled',
-  anchorScrolling:'enabled',
+const routerOption: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,routerOption),CommonModule,],
+  imports: [RouterModule.forRoot(routes, routerOption), CommonModule,],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

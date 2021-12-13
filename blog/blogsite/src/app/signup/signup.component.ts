@@ -24,11 +24,12 @@ export class SignupComponent implements OnInit {
         ]),
         email: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^([a-z]*[A-Z]*)\d*@prominentpixel.com$/),
+          Validators.pattern(/^([a-zA-Z0-9_.]*)\d*@prominentpixel.com$/),
+          Validators.minLength(29)
         ]),
         fullname: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^([a-z]*[A-Z]*)*$/),
+          Validators.pattern(/^([a-zA-Z0-9_ ])*$/),
         ]),
         password: new FormControl('', [
           Validators.required,

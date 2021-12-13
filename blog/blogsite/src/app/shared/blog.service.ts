@@ -2,7 +2,7 @@ import { Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from './auth.service';
-import { Blog } from './blog.model';
+import { Blog } from './Model/blog.model';
 
 @Injectable({
   providedIn: 'root',
@@ -145,7 +145,6 @@ export class BlogService {
       new Date(2021, 11, 14, 12, 38, 32, 0)
     ),
   ];
-  constructor(private authService: AuthService, private router: Router) { }
 
   getLatestIndexOfBlog() {
     return this.blogs.length;
@@ -156,31 +155,11 @@ export class BlogService {
   }
 
   getBlogByTitle(id) {
-    /*var tempBlog;
-    this.blogs.forEach(blog => {
-      
-      if ( id == blog.id) {
-        tempBlog=blog;
-        console.log(blog);
-        console.log(typeof blog);
-        console.log(blog.title);
-        
-      }
-      return [...tempBlog];
-    })*/
     for (var blog of this.getBlogs()) {
       if (id == blog.id) {
         return blog;
       }
     }
-
-    // for (let i = 0; i < this.getLatestIndexOfBlog(); i++) {
-    //   if (title == this.blogs[i].title && id == this.blogs[i].id) {
-    //     console.log(this.blogs[i]);
-    //         console.log(typeof this.blogs[i]);
-    //     return this.blogs[i];
-    //   }
-    // }
   }
 
   getBlog(index: number) {
@@ -191,13 +170,12 @@ export class BlogService {
     this.blogs.push(newBlog);
   }
 
-  getBlogById(id) {
+  getBlogById(id: number) {
     return this.blogs.findIndex((item) => item.id === id);
   }
 
-  updateBlogs(index: number, newBlog, date: any) {
+  updateBlogs(index: number, newBlog:Blog) {
     this.blogs[index] = newBlog;
-    this.blogs[index].date = date;
     this.updateBlog.next(this.blogs.slice());
   }
 
@@ -217,7 +195,7 @@ export class BlogService {
     ];;
   }
 
-  dropdownSettingsfunction() {
+  dropdownSettings() {
     return {
       singleSelection: false,
       idField: 'languageId',
