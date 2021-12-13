@@ -15,7 +15,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
 import { CKEditorModule } from 'node_modules/@ckeditor/ckeditor5-angular';
 import { AuthService } from './shared/auth.service';
-import { EditblogComponent } from './blog/editblog/editblog.component';
 import { MyblogComponent } from './blog/myblog/myblog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +28,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import { EditblogsComponent } from './blog/editblogs/editblogs.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 // AoT requires an exported function for factories
@@ -49,10 +47,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AddBlogComponent,
     BlogDetailComponent,
     BlogListComponent,
-    EditblogComponent,
     MyblogComponent,
     EditblogsComponent,
-    LoadingSpinnerComponent,
   ],
   imports: [
  

@@ -210,6 +210,8 @@ export class BlogService {
     this.blogs = this.blogs.filter((item) => item.id !== id);
     this.updateBlog.next();
     this.newBlog.next();
+    this.updateBlog.next(this.blogs.slice());
+    this.newBlog.next(this.blogs.slice());
   }
 
   deleteBlogs(id: number) {
