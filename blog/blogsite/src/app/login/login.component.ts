@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { AuthService } from '../shared/auth.service';
 export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm: NgForm;
   isUsername: boolean = true;
-  
+
   constructor(private authService: AuthService,
     private router: Router) { }
 

@@ -19,22 +19,18 @@ import { MyblogComponent } from './blog/myblog/myblog.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { EditblogsComponent } from './blog/editblogs/editblogs.component';
-
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
-
 
 @NgModule({
   declarations: [
@@ -51,11 +47,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     EditblogsComponent,
   ],
   imports: [
- 
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    
     BrowserModule,
     CKEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
@@ -70,9 +64,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
     BrowserAnimationsModule,
-    
     MatNativeDateModule,
-    
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

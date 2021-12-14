@@ -39,7 +39,7 @@
             </li>
             <li class="nav-item" routerLinkActive="active" style="cursor: pointer; color: white" *ngIf="loginUserName">
               welcome,{{ loginUserName }}
-              <button *ngIf="loginUserName" class="btn btn-success" (click)="logOut()" type="button"
+              <button *ngIf="loginUserName" class="btn btn-success" (click)="onLogOut()" type="button"
                 style="float: right">
                 {{ "Log out" | translate }}
               </button>

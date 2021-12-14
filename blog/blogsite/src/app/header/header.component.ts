@@ -21,15 +21,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getLogInUserName();
+    this.authService.getLoginDetail();
+  }
+
+  getLogInUserName() {
     this.subscription = this.authService.loginUser.subscribe(
       (loginUser) => {
         this.loginUserName = loginUser;
       }
     )
-    this.authService.getLoginDetail();
   }
 
-  logOut() {
-    this.authService.logOut();
+  onLogOut() {
+    this.authService.logout();
   }
 }

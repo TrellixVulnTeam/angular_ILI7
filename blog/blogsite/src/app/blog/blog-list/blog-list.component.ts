@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Blog } from 'src/app/shared/blog.model';
 import { BlogService } from 'src/app/shared/blog.service';
+import { Blog } from 'src/app/shared/Model/blog.model';
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
@@ -9,9 +9,9 @@ import { BlogService } from 'src/app/shared/blog.service';
 })
 export class BlogListComponent implements OnInit {
   blogs: Blog[] = [];
-  totalBlogToDisplay = 5;
-  scrollDistance = 2;
-  scrollThrottle = 1;
+  totalBlogToDisplay: number = 5;
+  scrollDistance: number = 2;
+  scrollThrottle: number = 1;
 
   constructor(private blogSerice: BlogService,
     private router: Router,
@@ -19,13 +19,22 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.blogs = this.blogSerice.blogs.slice(0, this.totalBlogToDisplay);
+    if (this.blogSerice.blogs.length > this.totalBlogToDisplay) {
+      this.blogs = this.blogSerice.blogs.slice(0, this.totalBlogToDisplay);
+    } else {
+      this.blogs = this.blogSerice.blogs.slice(0, this.blogSerice.blogs.length);
+    }
   }
 
   onScrollDown() {
     const latestBlogDisplay = this.totalBlogToDisplay;
     this.totalBlogToDisplay += 5;
-    var tempArray = this.blogSerice.blogs.slice(latestBlogDisplay, this.totalBlogToDisplay);
+    if (this.blogSerice.blogs.length > this.totalBlogToDisplay) {
+      var tempArray = this.blogSerice.blogs.slice(latestBlogDisplay, this.totalBlogToDisplay);
+    }
+    else {
+      var tempArray = this.blogSerice.blogs.slice(latestBlogDisplay, this.totalBlogToDisplay);
+    }
     this.blogs.push(...tempArray);
   }
 

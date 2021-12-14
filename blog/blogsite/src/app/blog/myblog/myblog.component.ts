@@ -5,7 +5,7 @@ import { BlogService } from 'src/app/shared/blog.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditblogsComponent } from '../editblogs/editblogs.component';
-import { Blog } from 'src/app/shared/blog.model';
+import { Blog } from 'src/app/shared/Model/blog.model';
 
 @Component({
   selector: 'app-myblog',
@@ -27,13 +27,7 @@ export class MyblogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.blogService.updateBlog.subscribe(() => {
-      this.myFinalBlogs = [];
-
-      this.authorName = this.authService.loginUserNameOrEmail;
-
-      this.getMyBlog();
-    });
+    this.getUpdatedBlog();
   }
 
   getMyBlog() {
@@ -42,6 +36,14 @@ export class MyblogComponent implements OnInit {
         this.myFinalBlogs.push(blog);
       }
     })
+  }
+
+  getUpdatedBlog() {
+    this.blogService.updateBlog.subscribe(() => {
+      this.myFinalBlogs = [];
+      this.authorName = this.authService.loginUserNameOrEmail;
+      this.getMyBlog();
+    });
   }
 
   onDetail(id: number) {

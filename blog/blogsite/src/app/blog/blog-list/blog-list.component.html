@@ -15,7 +15,7 @@
             </div>
             <div (click)="blogShowDetail(index)" style="cursor: pointer; ">
 
-              <h3 class="mb-1" [innerHTML]="blog.description"> </h3>
+              <h3 class="mb-1" >--{{blog.author}} </h3>
             </div>
             <div (click)="blogShowDetail(index)" style="cursor: pointer; " *ngFor="let language of blog.language;">
               #{{language.languageName}}
