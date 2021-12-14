@@ -12,7 +12,7 @@ import { Blog } from 'src/app/shared/Model/blog.model';
   templateUrl: './editblogs.component.html'
 })
 export class EditblogsComponent implements OnInit {
-  @Input() dataToTakeAsInput: any;
+  @Input() dataToTakeAsInput: number;
   @ViewChild('editBlogForm') updateForm: NgForm;
 
   public descriptionEditor = ClassicEditor;
@@ -35,7 +35,7 @@ export class EditblogsComponent implements OnInit {
 
   onEditBlogSubmit() {
     const id = this.blogService.blogs.findIndex(blog => blog.id === this.blogService.editBlogModal);
-    this.blogService.updateBlogs(id, this.updateForm.value);
+    this.blogService.updateBlogs(id, {...this.updateForm.value,date:this.blogForEdit.date});
     this.activeModal.close('Close click');
     this.router.navigate(['/myblog/']);
   }

@@ -5,7 +5,7 @@ export class Blog {
   imageUrl: string;
   author: string;
   language: { ['languageId']: number;['languageName']: string }[];
-  date?: Date;
+  date: Date;
   constructor(
     id: number,
     title: string,

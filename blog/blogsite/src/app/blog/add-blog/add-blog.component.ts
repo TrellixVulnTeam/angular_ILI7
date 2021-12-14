@@ -32,7 +32,6 @@ export class AddBlogComponent implements OnInit {
     }
     this.blogService.addBlog({
       ...this.addBlogForm.value,
-      description: this.addBlogForm.value.description,
       id: this.blogService.getLatestIndexOfBlog(),
       date: new Date(),
     });

@@ -32,7 +32,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-
 @NgModule({
   declarations: [
     AppComponent,
